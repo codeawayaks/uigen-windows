@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\(\\\\.ts|\\\\.tsx|\\\\.js|\\\\.json|\\\\.md|\\\\.css|\\\\.cjs\\)$\")",
+      "Bash(npx vitest:*)",
+      "Bash(npm audit:*)",
+      "Bash(node:*)",
+      "Bash(npm ls:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright"
+    ]
+  }
+}
