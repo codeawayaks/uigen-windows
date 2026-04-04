@@ -12,8 +12,8 @@ import { ChatInterface } from "@/components/chat/ChatInterface";
 import { FileTree } from "@/components/editor/FileTree";
 import { CodeEditor } from "@/components/editor/CodeEditor";
 import { PreviewFrame } from "@/components/preview/PreviewFrame";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { HeaderActions } from "@/components/HeaderActions";
+import { Monitor, Code2 } from "lucide-react";
 
 interface MainContentProps {
   user?: {
@@ -60,17 +60,39 @@ export function MainContent({ user, project }: MainContentProps) {
               <div className="h-full flex flex-col bg-white">
                 {/* Top Bar */}
                 <div className="h-14 border-b border-neutral-200/60 px-6 flex items-center justify-between bg-neutral-50/50">
-                  <Tabs
-                    value={activeView}
-                    onValueChange={(v) =>
-                      setActiveView(v as "preview" | "code")
-                    }
-                  >
-                    <TabsList className="bg-white/60 border border-neutral-200/60 p-0.5 h-9 shadow-sm">
-                      <TabsTrigger value="preview" className="data-[state=active]:bg-white data-[state=active]:text-neutral-900 data-[state=active]:shadow-sm text-neutral-600 px-4 py-1.5 text-sm font-medium transition-all">Preview</TabsTrigger>
-                      <TabsTrigger value="code" className="data-[state=active]:bg-white data-[state=active]:text-neutral-900 data-[state=active]:shadow-sm text-neutral-600 px-4 py-1.5 text-sm font-medium transition-all">Code</TabsTrigger>
-                    </TabsList>
-                  </Tabs>
+                  <div className="relative flex items-center bg-neutral-100 rounded-full p-1">
+                    {/* Sliding pill */}
+                    <div
+                      className={`absolute top-1 bottom-1 rounded-full bg-white shadow-sm transition-all duration-200 ease-in-out`}
+                      style={{
+                        width: "calc(50% - 4px)",
+                        transform: activeView === "preview" ? "translateX(0)" : "translateX(calc(100% + 0px))",
+                        left: "4px",
+                      }}
+                    />
+                    <button
+                      onClick={() => setActiveView("preview")}
+                      className={`relative z-10 flex items-center gap-1.5 px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-200 select-none ${
+                        activeView === "preview"
+                          ? "text-neutral-900"
+                          : "text-neutral-500 hover:text-neutral-700"
+                      }`}
+                    >
+                      <Monitor size={14} />
+                      Preview
+                    </button>
+                    <button
+                      onClick={() => setActiveView("code")}
+                      className={`relative z-10 flex items-center gap-1.5 px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-200 select-none ${
+                        activeView === "code"
+                          ? "text-neutral-900"
+                          : "text-neutral-500 hover:text-neutral-700"
+                      }`}
+                    >
+                      <Code2 size={14} />
+                      Code
+                    </button>
+                  </div>
                   <HeaderActions user={user} projectId={project?.id} />
                 </div>
 
